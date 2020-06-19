@@ -4,8 +4,6 @@ The name says it all; this is a UPnP-based port mapper for people who don't want
 
 This is a command-line based utility mainly because I run a headless server, which means a GUI wouldn't work. In the future, I might add a lightweight GUI using GTK+. Why GTK+? Because this is also a cross-platform utility and having one source base is **WAY** easier then making several repos for each version (Windows, macOS, Linux) of this utility. It's easier to hit compile and upload binaries to one repo in one project file.
 
-This tool uses the [Mono.NAT](https://github.com/alanmcgovern/Mono.Nat) library. This seemed to be the only slightly documented utility that could do what I wanted.
-
 ### Building
 I built this tool with [VS.2019](https://visualstudio.com), as I recommend you do as well. However, you can still compile without VS.2019 by using MSBuild™ (the ™ is because I haven't tried using MSBuild).
 
@@ -15,11 +13,11 @@ Open `upnp-portmapper.sln` in VS.2019. After ensuring everything has loaded prop
 **Via MSBuild**
 Run this command:
 ```sh
-MSBuild upnp-portmapper/upnp-portmapper.proj -property:Configuration=Prod
+MSBuild upnp-portmapper/upnp-portmapper.proj -property:Configuration=Debug
 ```
 
 ### Usage
 I don't even know yet. Once I find out how I'm going to make this work, it'll be in [the wiki, along with everything else](https://github.com/doamatto/upnp-portmapper/wiki)
 
 ### Acknowledgements
-Thanks to [FluxBytes](https://www.fluxbytes.com/) for having some insight on how to use Mono.NAT, as I quite literally could not find any other place with info on the utility (nor an alternative, actively developed utility).
+Thanks to [Lucas Ontivero](https://github.com/lontivero) for making the fork of Mono.Nat (which is Open.Nat) and documenting it well.
