@@ -5,7 +5,7 @@ namespace upnp_portmapper
 {
   class Program
     {
-      static int Main(string[] args)
+      static async System.Threading.Tasks.Task<int> Main(string[] args)
       {
         Console.WriteLine("UPnP Portmapper Pre-Release");
         Console.WriteLine("Warning: this may not work whatsoever. That's because it isn't done yet.");
@@ -20,20 +20,19 @@ namespace upnp_portmapper
 
         var discover = new NatDiscoverer();
         var device = await discover.DiscoverDeviceAsync();
-        INatDevice device; // TODO: Get this to be properly implemented (oh god there's no docs anywhere wtf)
 
         switch(Console.ReadLine())
         {
           case "ip":
           {
-            Console.WriteLine(device.GetExternalIPAsync().ToString());
+            Console.WriteLine(await device.GetExternalIPAsync());
             break;
           }
           case "add":
           {
             if (args.Length == 0)
             {
-              Console.WriteLine("You need to provide a protocol (TCP/UDP/TCP_UDP), an external port (what people outside your network connect to), an internal port (what people on your network and what your router forwards traffic to), and, optionally, a description to replace what will be disclosed as the purpose of the port forward (this is Mono.Nat via UPnP-PortMapper, by default).");
+              Console.WriteLine("You need to provide a protocol (TCP/UDP/TCP_UDP), an external port (what people outside your network connect to), an internal port (what people on your network and what your router forwards traffic to), and, optionally, a description to replace what will be disclosed as the purpose of the port forward (this is \"Mono.Nat via UPnP-PortMapper\", by default).");
               return 1;
             } // If no args, reset
             int external;
@@ -50,11 +49,12 @@ namespace upnp_portmapper
             {
               protocol = Protocol.Udp;
             } // TODO: add a both option (TCP_UDP)
-            Mapping m = new Mapping(protocol, external, internalS);
+            Mapping m;
+            m = new Mapping(protocol, external, internalS, "Mono.Nat via UPnP-PortMapper");
             if (args[3] != "")
             {
-              m.Description = args[3];
-            } // If you provide a description, this will fire;
+              m = new Mapping(protocol, external, internalS, args[3]);
+            } // If you provide a description, this will fire; otherwise, it'll default to something else
             break;
           }
       }
