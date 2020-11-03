@@ -1,5 +1,7 @@
 # UPnP-PortMapper
 
+**Note: this project has been cancelled. This is because port-forwarding the intended route is much, much safer than UPnP. [Even the FBI thinks so.](https://web.archive.org/web/20120828032955/http://www.pcworld.com:80/article/78143/fbi_agency_revises_xp_security_alert.html)**
+
 The name says it all; this is a UPnP-based port mapper for people who don't want to port forward, want to take the easy way, or (like myself) have no clue why their portforwarding isn't working. The main issues is that all the port mappers I've seen have a few things in common (and it makes little sense to me, actually): they're written in Java, they don't work, and they don't have someone actively working on fixing bugs and other issues. In other words, it's a classic case of "Guess I've got to do it myself."
 
 This is a command-line based utility mainly because I run a headless server, which means a GUI wouldn't work. In the future, I might add a lightweight GUI using GTK+. Why GTK+? Because this is also a cross-platform utility and having one source base is **WAY** easier then making several repos for each version (Windows, macOS, Linux) of this utility. It's easier to hit compile and upload binaries to one repo in one project file.
